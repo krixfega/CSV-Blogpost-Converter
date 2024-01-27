@@ -14,7 +14,11 @@ use App\Http\Controllers\BlogController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/blog', [BlogController::class, 'index']);
+Route::get('/', [BlogController::class, 'index']);
+Route::get('/upload', [BlogController::class, 'showUploadForm']);
+Route::post('/upload', [BlogController::class, 'uploadFile']);
+Route::get('/posts/{post}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/posts/{id}/edit', [BlogController::class, 'edit'])->name('posts.edit');
+Route::put('/posts/{id}', [BlogController::class, 'update'])->name('posts.update');
+Route::get('/blog/{post}/edit', [BlogController::class, 'edit'])->name('blog.edit');
+Route::patch('/blog/edit', [BlogController::class, 'update'])->name('blog.update');
